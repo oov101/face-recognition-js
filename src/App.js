@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Tensorflow from './components/Tensorflow/Tensorflow';
+import FaceApi from './components/FaceApi/FaceApi';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Tensorflow />
+        <FaceApi />
       </div>
     );
   }
