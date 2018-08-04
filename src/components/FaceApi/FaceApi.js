@@ -93,9 +93,9 @@ class FaceApi extends Component {
   }
 
   async run() {
-    await faceapi.loadFaceDetectionModel('/');
-    await faceapi.loadFaceLandmarkModel('/');
-    await faceapi.loadFaceRecognitionModel('/');
+    await faceapi.loadFaceDetectionModel('/static/weights');
+    await faceapi.loadFaceLandmarkModel('/static/weights');
+    await faceapi.loadFaceRecognitionModel('/static/weights');
 
     this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, 1);
     this.updateResults();
