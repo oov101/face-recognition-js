@@ -1,0 +1,13 @@
+#render-container {
+  position: relative;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#inputImg {
+  max-width: 800px;
+}
