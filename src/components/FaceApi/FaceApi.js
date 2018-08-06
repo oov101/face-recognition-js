@@ -6,7 +6,7 @@ class FaceApi extends Component {
   constructor() {
     super();
     this.state = {
-      classes: ['howard', 'leonard', 'penny', 'raj', 'sheldon'],
+      classes: ['howard', 'leonard', 'penny', 'raj', 'sheldon', 'bernadette', 'amy', 'stuart'],
       image: '?'
     };
     this.maxDistance = 0.6;
