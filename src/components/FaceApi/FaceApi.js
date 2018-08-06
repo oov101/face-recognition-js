@@ -104,7 +104,7 @@ class FaceApi extends Component {
   render() {
     return(
       <div id="render-container">
-        <img id="inputImg" src='images/image1.jpg' alt="" />
+        <img id="inputImg" src='static/images/image1.jpg' alt="" />
         <canvas id="overlay" />
       </div>
     );
