@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import faceapi from 'face-api.js/dist/face-api.js';
+import * as faceapi from 'face-api.js/dist/face-api.js';
 import './FaceApi.css';
 
 class FaceApi extends Component {
