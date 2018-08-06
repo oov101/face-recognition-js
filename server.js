@@ -26,28 +26,6 @@ app.get('/images/:name', function (req, res, next) {
 
 });
 
-app.get('/weights/:name', function (req, res, next) {
-
-  var options = {
-    root: __dirname + '/public/weights',
-    dotfiles: 'deny',
-    headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
-    }
-  };
-
-  var fileName = req.params.name;
-  res.sendFile(fileName, options, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Sent:', fileName);
-    }
-  });
-
-});
-
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
