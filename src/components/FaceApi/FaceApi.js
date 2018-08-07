@@ -25,12 +25,13 @@ class FaceApi extends Component {
   }
 
   openFile () {
-    var file = dialog.showOpenDialog(function (fileNames) {
+    dialog.showOpenDialog(function (fileNames) {
       if (fileNames === undefined) return;
-      var fileName = fileNames[0];
-      fs.readFile(fileName, 'utf-8', function (err, data) {
+      var filePath = fileNames[0];
+      fs.readFile(filePath, 'utf-8', function (err, data) {
+        console.log(data);
         this.setState({
-          image: data
+          image: 'test'
         });
       });
     });
@@ -122,10 +123,12 @@ class FaceApi extends Component {
     return(
       <div>
         <button onClick={this.openFile}>Open file</button>
-        <div id="render-container">
-          <img id="inputImg" src={this.state.image} alt="" />
-          <canvas id="overlay" />
-        </div>
+          {this.state.image &&
+            <div id="render-container">
+              <img id="inputImg" src={this.state.image} alt="" />
+              <canvas id="overlay" />
+            </div>
+          }
       </div>
     );
   }
