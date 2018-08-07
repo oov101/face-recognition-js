@@ -1,7 +1,7 @@
 {
   "name": "face-recognition-js",
   "version": "0.1.0",
-  "main": "src/electron-starter.js",
+  "main": "src/electron.js",
   "private": true,
   "dependencies": {
     "express": "^4.16.2",

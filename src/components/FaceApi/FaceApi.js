@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import * as faceapi from 'face-api.js/dist/face-api.js';
 import './FaceApi.css';
+const electron = window.require("electron");
+const { dialog } = electron.remote;
 
 class FaceApi extends Component {
   constructor() {
     super();
     this.state = {
       classes: ['howard', 'leonard', 'penny', 'raj', 'sheldon', 'bernadette', 'amy', 'stuart'],
-      image: '?'
+      image: ''
     };
     this.maxDistance = 0.6;
     this.minConfidence = 0.7;
@@ -17,6 +19,14 @@ class FaceApi extends Component {
 
   componentDidMount() {
     this.run();
+  }
+
+  openFile() {
+    dialog.showOpenDialog(function (fileNames) {
+      if (fileNames === undefined) return;
+      var fileName = fileNames[0];
+      console.log(fileName);
+    });
   }
 
   getFaceImageUri(className, idx) {
@@ -104,8 +114,9 @@ class FaceApi extends Component {
   render() {
     return(
       <div id="render-container">
-        <img id="inputImg" src='static/images/image1.jpg' alt="" />
+        <img id="inputImg" src={this.state.image} alt="" />
         <canvas id="overlay" />
+        <button onClick={this.openFile}>Open file</button>
       </div>
     );
   }
