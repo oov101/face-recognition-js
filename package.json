@@ -29,6 +29,6 @@
     "client": "npm run start",
     "server": "nodemon server.js",
     "dev-con": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "dev" : "nf start"
+    "dev": "nf start"
   }
 }
