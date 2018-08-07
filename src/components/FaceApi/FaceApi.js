@@ -4,7 +4,6 @@ import './FaceApi.css';
 const electron = window.require("electron");
 const { dialog } = electron.remote;
 const fs = electron.remote.require('fs');
-const ipcRenderer  = electron.ipcRenderer;
 
 class FaceApi extends Component {
   constructor() {
@@ -25,13 +24,15 @@ class FaceApi extends Component {
   }
 
   openFile () {
-    dialog.showOpenDialog(function (fileNames) {
+    dialog.showOpenDialog(fileNames => {
       if (fileNames === undefined) return;
       var filePath = fileNames[0];
-      fs.readFile(filePath, 'utf-8', function (err, data) {
+      console.log(filePath);
+
+      fs.readFile(filePath, 'utf-8', (err, data) => {
         console.log(data);
         this.setState({
-          image: 'test'
+          image: ''
         });
       });
     });
