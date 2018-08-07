@@ -19,8 +19,8 @@ class FaceApi extends Component {
     this.openFile = this.openFile.bind(this);
   }
 
-  componentDidMount() {
-
+  componentDidUpdate() {
+    this.run();
   }
 
   openFile () {
@@ -29,10 +29,17 @@ class FaceApi extends Component {
       var filePath = fileNames[0];
       console.log(filePath);
 
-      fs.readFile(filePath, 'utf-8', (err, data) => {
+      fs.readFile(filePath, (err, data) => {
         console.log(data);
+
+        //convert image file to base64-encoded string
+        let base64Image = data.toString('base64');
+
+        //combine all strings
+        let imgSrcString = `data:image/${filePath.split('.').pop()};base64,${base64Image}`;
+        console.log(imgSrcString);
         this.setState({
-          image: ''
+          image: imgSrcString
         });
       });
     });
