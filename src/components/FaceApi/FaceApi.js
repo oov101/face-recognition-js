@@ -3,6 +3,8 @@ import * as faceapi from 'face-api.js/dist/face-api.js';
 import './FaceApi.css';
 const electron = window.require("electron");
 const { dialog } = electron.remote;
+const fs = electron.remote.require('fs');
+const ipcRenderer  = electron.ipcRenderer;
 
 class FaceApi extends Component {
   constructor() {
@@ -15,17 +17,22 @@ class FaceApi extends Component {
     this.minConfidence = 0.7;
     this.useBatchProcessing = false;
     this.trainDescriptorsByClass = [];
+    this.openFile = this.openFile.bind(this);
   }
 
   componentDidMount() {
-    this.run();
+
   }
 
-  openFile() {
-    dialog.showOpenDialog(function (fileNames) {
+  openFile () {
+    var file = dialog.showOpenDialog(function (fileNames) {
       if (fileNames === undefined) return;
       var fileName = fileNames[0];
-      console.log(fileName);
+      fs.readFile(fileName, 'utf-8', function (err, data) {
+        this.setState({
+          image: data
+        });
+      });
     });
   }
 
@@ -113,10 +120,12 @@ class FaceApi extends Component {
 
   render() {
     return(
-      <div id="render-container">
-        <img id="inputImg" src={this.state.image} alt="" />
-        <canvas id="overlay" />
+      <div>
         <button onClick={this.openFile}>Open file</button>
+        <div id="render-container">
+          <img id="inputImg" src={this.state.image} alt="" />
+          <canvas id="overlay" />
+        </div>
       </div>
     );
   }
