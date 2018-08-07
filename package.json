@@ -6,16 +6,21 @@
   "dependencies": {
     "express": "^4.16.2",
     "face-api.js": "^0.10.0",
+    "file-system": "^2.2.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.4"
   },
+  "homepage": "./",
   "devDependencies": {
     "concurrently": "^3.5.0",
     "electron": "^2.0.6",
+    "foreman": "^3.0.1",
     "nodemon": "^1.18.3"
   },
   "scripts": {
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "electron-dev-windows": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
     "electron": "electron .",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -23,7 +28,8 @@
     "eject": "react-scripts eject",
     "client": "npm run start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev-con": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev" : "nf start"
   },
   "proxy": "http://localhost:5000/"
 }
