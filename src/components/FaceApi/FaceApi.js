@@ -27,17 +27,9 @@ class FaceApi extends Component {
     dialog.showOpenDialog(fileNames => {
       if (fileNames === undefined) return;
       var filePath = fileNames[0];
-      console.log(filePath);
-
       fs.readFile(filePath, (err, data) => {
-        console.log(data);
-
-        //convert image file to base64-encoded string
         let base64Image = data.toString('base64');
-
-        //combine all strings
         let imgSrcString = `data:image/${filePath.split('.').pop()};base64,${base64Image}`;
-        console.log(imgSrcString);
         this.setState({
           image: imgSrcString
         });
@@ -65,6 +57,7 @@ class FaceApi extends Component {
             await this.fetchImage(this.getFaceImageUri(className, i))
           )
           descriptors.push(await net.computeFaceDescriptor(img))
+          
         }
         return {
           descriptors,
@@ -122,7 +115,6 @@ class FaceApi extends Component {
     await faceapi.loadFaceDetectionModel('/static/weights');
     await faceapi.loadFaceLandmarkModel('/static/weights');
     await faceapi.loadFaceRecognitionModel('/static/weights');
-
     this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, 1);
     this.updateResults();
   }
