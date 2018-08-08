@@ -38,7 +38,7 @@ class FaceApi extends Component {
   }
 
   getFaceImageUri(className, idx) {
-    return `images/${className}/${className}${idx}.png`
+    return `static/images/${className}/${className}${idx}.png`
   }
 
   async fetchImage(uri) {
