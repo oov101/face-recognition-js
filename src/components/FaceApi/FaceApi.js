@@ -38,7 +38,7 @@ class FaceApi extends Component {
   }
 
   getFaceImageUri(className, idx) {
-    return `static/images/${className}/${className}${idx}.png`
+    return `./images/${className}/${className}${idx}.png`
   }
 
   async fetchImage(uri) {
@@ -112,9 +112,9 @@ class FaceApi extends Component {
   }
 
   async run() {
-    await faceapi.loadFaceDetectionModel('/static/weights');
-    await faceapi.loadFaceLandmarkModel('/static/weights');
-    await faceapi.loadFaceRecognitionModel('/static/weights');
+    await faceapi.loadFaceDetectionModel('./weights');
+    await faceapi.loadFaceLandmarkModel('./weights');
+    await faceapi.loadFaceRecognitionModel('./weights');
     this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, 1);
     this.updateResults();
   }
