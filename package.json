@@ -4,19 +4,15 @@
   "main": "src/electron.js",
   "private": true,
   "dependencies": {
-    "express": "^4.16.2",
     "face-api.js": "^0.10.0",
     "file-system": "^2.2.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.4"
   },
-  "homepage": "./",
   "devDependencies": {
-    "concurrently": "^3.5.0",
     "electron": "^2.0.6",
-    "foreman": "^3.0.1",
-    "nodemon": "^1.18.3"
+    "foreman": "^3.0.1"
   },
   "scripts": {
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
@@ -27,8 +23,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "client": "npm run start",
-    "server": "nodemon server.js",
-    "dev": "nf start",
-    "dev-con": "concurrently --kill-others-on-fail \"npm run start\" \"npm run dev\""
+    "dev": "nf start"
   }
 }
