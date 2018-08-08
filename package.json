@@ -30,5 +30,6 @@
     "server": "nodemon server.js",
     "dev": "nf start",
     "dev-con": "concurrently --kill-others-on-fail \"npm run server\" \"npm run dev\""
-  }
+  },
+  "proxy": "http://localhost:6000"
 }
