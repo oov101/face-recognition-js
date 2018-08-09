@@ -9,7 +9,12 @@ class FaceApi extends Component {
   constructor() {
     super();
     this.state = {
-      classes: ['howard', 'leonard', 'penny', 'raj', 'sheldon', 'bernadette', 'amy', 'stuart'],
+      classes: [
+        {
+          name: 'sheldon',
+          bufferImages: ['asdasd']
+        }
+      ],
       image: ''
     };
     this.maxDistance = 0.6;
@@ -17,13 +22,35 @@ class FaceApi extends Component {
     this.useBatchProcessing = false;
     this.trainDescriptorsByClass = [];
     this.openFile = this.openFile.bind(this);
+    this.openAndAddSuspectImages = this.openAndAddSuspectImages.bind(this);
+    this.numbersOfSuspectImages = this.numbersOfSuspectImages.bind(this);
   }
 
-  componentDidUpdate() {
-    this.run();
+  openAndAddSuspectImages() {
+    dialog.showOpenDialog(
+      { properties: ['openFile', 'multiSelections'] },
+      fileNames => {
+        if (fileNames === undefined) return;
+        let bufferArray = [];
+        fileNames.forEach((FileName) => {
+          fs.readFile(FileName, (err, data) => {
+            bufferArray.push(new Blob(data));
+          });
+        });
+        
+        this.setState({
+          classes: [
+            {
+              bufferImages: bufferArray
+            }
+          ]
+        });
+      }
+    );
   }
 
-  openFile () {
+
+  openFile() {
     dialog.showOpenDialog(fileNames => {
       if (fileNames === undefined) return;
       var filePath = fileNames[0];
@@ -33,6 +60,7 @@ class FaceApi extends Component {
         this.setState({
           image: imgSrcString
         });
+        this.run();
       });
     });
   }
@@ -46,18 +74,41 @@ class FaceApi extends Component {
   }
 
   // fetch first image of each class and compute their descriptors
-  async initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
+  // async initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
+  //   const maxAvailableImagesPerClass = 5
+  //   numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
+  //   return Promise.all(this.state.classes.map(
+  //     async className => {
+  //       const descriptors = []
+  //       for (let i = 1; i < (numImagesForTraining + 1); i++) {
+  //         const img = await faceapi.bufferToImage(
+  //           await this.fetchImage(this.getFaceImageUri(className, i))
+  //         )
+  //         descriptors.push(await net.computeFaceDescriptor(img))
+          
+  //       }
+  //       return {
+  //         descriptors,
+  //         className
+  //       }
+  //     }
+  //   ))
+  // }
+
+  numbersOfSuspectImages() {
+    return this.state.classes[0].bufferImages.length;
+  }
+
+  async initTrainDescriptorsByClass(net, numbersOfSuspectImages) {
     const maxAvailableImagesPerClass = 5
-    numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
+    numbersOfSuspectImages = Math.min(numbersOfSuspectImages, maxAvailableImagesPerClass)
     return Promise.all(this.state.classes.map(
       async className => {
         const descriptors = []
-        for (let i = 1; i < (numImagesForTraining + 1); i++) {
-          const img = await faceapi.bufferToImage(
-            await this.fetchImage(this.getFaceImageUri(className, i))
-          )
+        for (let i = 0; i < (numbersOfSuspectImages); i++) {
+          const img = await faceapi.bufferToImage(className.bufferImages[i])
           descriptors.push(await net.computeFaceDescriptor(img))
-          
+
         }
         return {
           descriptors,
@@ -115,13 +166,14 @@ class FaceApi extends Component {
     await faceapi.loadFaceDetectionModel('./weights');
     await faceapi.loadFaceLandmarkModel('./weights');
     await faceapi.loadFaceRecognitionModel('./weights');
-    this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, 1);
+    this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, this.numbersOfSuspectImages());
     this.updateResults();
   }
 
   render() {
     return(
       <div>
+        <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
         <button onClick={this.openFile}>Open file</button>
           {this.state.image &&
             <div id="render-container">
