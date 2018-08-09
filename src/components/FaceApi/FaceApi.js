@@ -86,9 +86,7 @@ class FaceApi extends Component {
         const name = suspect.name;
         
         suspect.bufferImages.forEach(async (bufferImage) => {
-          const img = await faceapi.bufferToImage(await new Promise((resolve, reject) => {
-            resolve(bufferImage);
-          }));
+          const img = await faceapi.bufferToImage(await bufferImage);
           descriptors.push(await net.computeFaceDescriptor(img));
         });
 
