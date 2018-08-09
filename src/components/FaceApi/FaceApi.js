@@ -12,7 +12,7 @@ class FaceApi extends Component {
       classes: [
         {
           name: 'sheldon',
-          bufferImages: ['asdasd']
+          bufferImages: []
         }
       ],
       image: ''
@@ -31,24 +31,24 @@ class FaceApi extends Component {
       { properties: ['openFile', 'multiSelections'] },
       fileNames => {
         if (fileNames === undefined) return;
-        let bufferArray = [];
+        let blobArray = [];
         fileNames.forEach((FileName) => {
           fs.readFile(FileName, (err, data) => {
-            bufferArray.push(new Blob(data));
+            blobArray.push(new Blob([new Uint8Array(data)]));
           });
         });
         
         this.setState({
           classes: [
             {
-              bufferImages: bufferArray
+              name: this.state.classes[0].name,
+              bufferImages: blobArray
             }
           ]
         });
       }
     );
   }
-
 
   openFile() {
     dialog.showOpenDialog(fileNames => {
@@ -73,28 +73,6 @@ class FaceApi extends Component {
     return (await fetch(uri)).blob()
   }
 
-  // fetch first image of each class and compute their descriptors
-  // async initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
-  //   const maxAvailableImagesPerClass = 5
-  //   numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
-  //   return Promise.all(this.state.classes.map(
-  //     async className => {
-  //       const descriptors = []
-  //       for (let i = 1; i < (numImagesForTraining + 1); i++) {
-  //         const img = await faceapi.bufferToImage(
-  //           await this.fetchImage(this.getFaceImageUri(className, i))
-  //         )
-  //         descriptors.push(await net.computeFaceDescriptor(img))
-          
-  //       }
-  //       return {
-  //         descriptors,
-  //         className
-  //       }
-  //     }
-  //   ))
-  // }
-
   numbersOfSuspectImages() {
     return this.state.classes[0].bufferImages.length;
   }
@@ -103,16 +81,20 @@ class FaceApi extends Component {
     const maxAvailableImagesPerClass = 5
     numbersOfSuspectImages = Math.min(numbersOfSuspectImages, maxAvailableImagesPerClass)
     return Promise.all(this.state.classes.map(
-      async className => {
-        const descriptors = []
-        for (let i = 0; i < (numbersOfSuspectImages); i++) {
-          const img = await faceapi.bufferToImage(className.bufferImages[i])
-          descriptors.push(await net.computeFaceDescriptor(img))
+      async suspect => {
+        const descriptors = [];
+        const name = suspect.name;
+        
+        suspect.bufferImages.forEach(async (bufferImage) => {
+          const img = await faceapi.bufferToImage(await new Promise((resolve, reject) => {
+            resolve(bufferImage);
+          }));
+          descriptors.push(await net.computeFaceDescriptor(img));
+        });
 
-        }
         return {
           descriptors,
-          className
+          name
         }
       }
     ))
@@ -129,9 +111,9 @@ class FaceApi extends Component {
     }
     return descriptorsByClass
       .map(
-        ({ descriptors, className }) => ({
+        ({ descriptors, name }) => ({
           distance: computeMeanDistance(descriptors),
-          className
+          name
         })
       )
       .reduce((best, curr) => best.distance < curr.distance ? best : curr)
@@ -150,7 +132,7 @@ class FaceApi extends Component {
     fullFaceDescriptions.forEach(({ detection, descriptor }) => {
       faceapi.drawDetection('overlay', [detection], { withScore: false });
       const bestMatch = this.getBestMatch(this.trainDescriptorsByClass, descriptor);
-      const text = `${bestMatch.distance < this.maxDistance ? bestMatch.className : 'unkown'}`;
+      const text = `${bestMatch.distance < this.maxDistance ? bestMatch.name : 'unkown'}`;
       const { x, y, height: boxHeight } = detection.getBox();
       faceapi.drawText(
         canvas.getContext('2d'),
