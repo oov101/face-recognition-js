@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import FaceReco from './components/FaceReco/FaceReco';
 import Welcome from './components/Welcome/Welcome';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Tutorial from './components/Tutorial/Tutorial';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         <div className="App">
           <Route exact path="/" component={Welcome} />
           <Route path="/FaceReco" component={FaceReco} />
+          <Route path="/Tutorial" component={Tutorial} />
         </div>
       </Router>
     );

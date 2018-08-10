@@ -5,7 +5,7 @@ class Welcome extends Component {
     return(
       <div>
         <h1>Face Recognition Application</h1>
-        <button>Tutorial</button>
+        <Link to="/Tutorial"><button>Tutorial</button></Link>
         <Link to="/FaceReco"><button>Start</button></Link>
       </div>
     );
