@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as faceapi from 'face-api.js/dist/face-api.js';
-import './FaceApi.css';
+import './FaceReco.css';
 const electron = window.require("electron");
 const { dialog } = electron.remote;
 const fs = electron.remote.require('fs');

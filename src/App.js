@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import FaceApi from './components/FaceApi/FaceApi';
+import FaceReco from './components/FaceApi/FaceApi';
+import Welcome from './components/Welcome/Welcome';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 class App extends Component {
-  
   render() {
     return (
       <Router>
         <div className="App">
           <Welcome exact path="/" component={Welcome} />
-          <FaceApi path="/FaceReco" />
+          <FaceReco path="/FaceReco" component={FaceReco} />
         </div>
       </Router>
     );
