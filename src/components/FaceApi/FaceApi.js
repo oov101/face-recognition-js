@@ -39,14 +39,14 @@ class FaceApi extends Component {
           });
         });
         
-        this.setState({
+        this.setState(prevState => ({
           classes: [
             {
-              name: this.state.classes[0].name,
+              ...prevState.classes[0],
               bufferImages: blobArray
             }
           ]
-        });
+        }));
       }
     );
   }
