@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as faceapi from 'face-api.js/dist/face-api.js';
 import './FaceReco.css';
+import { Link } from 'react-router-dom';
 const electron = window.require("electron");
 const { dialog } = electron.remote;
 const fs = electron.remote.require('fs');
@@ -164,6 +165,7 @@ class FaceApi extends Component {
   render() {
     return(
       <div>
+        <Link to="/"><button>Home</button></Link>
         <input type="text" value={this.state.classes[0].name} onChange={this.handleChange} />
         <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
         <button onClick={this.openFile}>Open file</button>
