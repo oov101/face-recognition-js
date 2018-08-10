@@ -11,7 +11,7 @@ class FaceApi extends Component {
     this.state = {
       classes: [
         {
-          name: 'sheldon',
+          name: 'suspect',
           bufferImages: []
         }
       ],
@@ -24,6 +24,7 @@ class FaceApi extends Component {
     this.openFile = this.openFile.bind(this);
     this.openAndAddSuspectImages = this.openAndAddSuspectImages.bind(this);
     this.numbersOfSuspectImages = this.numbersOfSuspectImages.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   openAndAddSuspectImages() {
@@ -150,9 +151,20 @@ class FaceApi extends Component {
     this.updateResults();
   }
 
+  handleChange(event) {
+    this.setState({
+      classes: [
+        {
+          name: event.target.value
+        }
+      ]
+    })
+  }
+
   render() {
     return(
       <div>
+        <input type="text" value={this.state.classes[0].name} onChange={this.handleChange} />
         <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
         <button onClick={this.openFile}>Open file</button>
           {this.state.image &&
