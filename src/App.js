@@ -8,8 +8,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Welcome exact path="/" component={Welcome} />
-          <FaceReco path="/FaceReco" component={FaceReco} />
+          <Route exact path="/" component={Welcome} />
+          <Route path="/FaceReco" component={FaceReco} />
         </div>
       </Router>
     );
