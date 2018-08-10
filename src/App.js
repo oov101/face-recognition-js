@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import FaceReco from './components/FaceApi/FaceApi';
+import FaceReco from './components/FaceReco/FaceReco';
 import Welcome from './components/Welcome/Welcome';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 class App extends Component {
