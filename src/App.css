@@ -1,8 +1,17 @@
 body {
   background-color: #3b322c;
-  color: #ffffff;
+  color: #94e8b4;
 }
 
 button {
-  background-color: #72bda3;
+  background-color: Transparent;
+  padding: 10px;
+  margin: 5px;
+  color: #94e8b4;
+  border: 2px solid #94e8b4;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
