@@ -11,3 +11,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+#Welcome .title-span {
+  font-weight: 100;
+  color: #e6ffef;
+}
