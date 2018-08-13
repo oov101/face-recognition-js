@@ -21,6 +21,11 @@ body {
   color: #94e8b4;
 }
 
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
 button {
   background-color: Transparent;
   padding: 10px;

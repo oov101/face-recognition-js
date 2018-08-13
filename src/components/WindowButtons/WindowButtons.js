@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './WindowButtons.css';
 const { BrowserWindow } = window.require('electron').remote;
 
 class WindowButtons extends Component {

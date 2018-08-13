@@ -1,0 +1,9 @@
+#WindowButtons {
+  height: 0;
+  text-align: right;
+}
+
+#WindowButtons > button {
+  padding: 3px;
+  
+} 
