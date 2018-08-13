@@ -1,11 +1,8 @@
 #WindowButtons {
   text-align: right;
-  position: absolute;
-  width: 100%;
-  z-index: -1;
+  height: 0;
 }
 
 #WindowButtons > button {
   padding: 3px;
-  
 } 

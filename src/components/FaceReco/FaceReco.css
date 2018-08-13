@@ -11,3 +11,7 @@
 #inputImg {
   max-width: 800px;
 }
+
+#faceReco {
+  z-index: 1;
+}
