@@ -13,12 +13,16 @@
   max-width: 800px;
 }
 
-#FaceReco {
-  height: 100%;
-}
-
 #render-container > div {
   margin: 50px;
   display: inline-block;
   position: relative;
+}
+
+#FaceReco {
+  height: 100%;
+}
+
+#FaceReco input {
+  background-color: transparent;
 }

@@ -32,7 +32,8 @@ button {
   -webkit-app-region: no-drag;
 }
 
-button {
+button,
+input {
   background-color: Transparent;
   padding: 10px;
   margin: 5px;
@@ -44,3 +45,11 @@ button {
   overflow: hidden;
   outline: none;
 }
+
+input {
+  color: #e8fcef;
+  border: none;
+  border-bottom: 2px solid #94e8b4;
+  border-radius: 0;
+  width: 100px;
+} 
