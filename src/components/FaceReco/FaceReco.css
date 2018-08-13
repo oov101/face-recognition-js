@@ -1,5 +1,6 @@
 #render-container {
   position: relative;
+  text-align: center;
 }
 
 #overlay {
@@ -12,6 +13,12 @@
   max-width: 800px;
 }
 
-#faceReco {
-  z-index: 1;
+#FaceReco {
+  height: 100%;
+}
+
+#render-container > div {
+  margin: 50px;
+  display: inline-block;
+  position: relative;
 }

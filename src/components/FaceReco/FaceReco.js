@@ -169,12 +169,14 @@ class FaceApi extends Component {
         <input type="text" value={this.state.classes[0].name} onChange={this.handleChange} />
         <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
         <button onClick={this.openFile}>Open file</button>
-          {this.state.image &&
-            <div id="render-container">
+        {this.state.image &&
+          <div id="render-container">
+            <div>
               <img id="inputImg" src={this.state.image} alt="" />
               <canvas id="overlay" />
             </div>
-          }
+          </div>
+        }
       </div>
     );
   }
