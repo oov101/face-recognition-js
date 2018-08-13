@@ -1,6 +1,8 @@
 #WindowButtons {
-  height: 0;
   text-align: right;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
 }
 
 #WindowButtons > button {

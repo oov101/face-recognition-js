@@ -164,7 +164,7 @@ class FaceApi extends Component {
 
   render() {
     return(
-      <div>
+      <div id='FaceReco'>
         <Link to="/"><button>Home</button></Link>
         <input type="text" value={this.state.classes[0].name} onChange={this.handleChange} />
         <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
