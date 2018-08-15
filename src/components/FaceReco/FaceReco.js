@@ -13,7 +13,8 @@ class FaceApi extends Component {
       classes: [
         {
           name: '',
-          bufferImages: []
+          bufferImages: [],
+          base64: []
         }
       ],
       image: ''
@@ -26,6 +27,7 @@ class FaceApi extends Component {
     this.openAndAddSuspectImages = this.openAndAddSuspectImages.bind(this);
     this.numbersOfSuspectImages = this.numbersOfSuspectImages.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.force = this.force.bind(this);
   }
 
   openAndAddSuspectImages() {
@@ -34,9 +36,12 @@ class FaceApi extends Component {
       fileNames => {
         if (fileNames === undefined) return;
         let blobArray = [];
+        let base64Array = [];
         fileNames.forEach((FileName) => {
           fs.readFile(FileName, (err, data) => {
             blobArray.push(new Blob([new Uint8Array(data)]));
+            let base64Image = data.toString('base64');
+            base64Array.push('data:image/png;base64,' + base64Image);
           });
         });
         
@@ -44,12 +49,14 @@ class FaceApi extends Component {
           classes: [
             {
               ...prevState.classes[0],
-              bufferImages: blobArray
+              bufferImages: blobArray,
+              base64: base64Array
             }
           ]
         }));
       }
     );
+    this.force();
   }
 
   openFile() {
@@ -162,13 +169,25 @@ class FaceApi extends Component {
     })
   }
 
+  force() {
+    this.forceUpdate();
+  }
+
   render() {
     return(
       <div id='FaceReco'>
-        <Link to="/"><button>Home</button></Link>
-        <input type="text" placeholder='Name:' value={this.state.classes[0].name} onChange={this.handleChange} />
-        <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
-        <button onClick={this.openFile}>Open file</button>
+        <div className='toolbar'>
+          <Link to="/"><button>Home</button></Link>
+          <input type="text" placeholder='Name:' value={this.state.classes[0].name} onChange={this.handleChange} />
+          <button onClick={this.openAndAddSuspectImages}>Open suspect file</button>
+          <button onClick={this.openFile}>Open file</button>
+        </div>
+        <div className='suspect-images'>
+          { this.state.classes[0].base64 &&
+            this.state.classes[0].base64.map((imageSrc, i) => {
+            return <img key={i} src={imageSrc} alt="" />
+          })} 
+        </div>
         {this.state.image &&
           <div id="render-container">
             <div>

@@ -10,7 +10,7 @@
 }
 
 #inputImg {
-  max-width: 800px;
+  max-width: 700px;
 }
 
 #render-container > div {
@@ -21,4 +21,13 @@
 
 #FaceReco {
   height: 100%;
+}
+
+#FaceReco .suspect-images {
+  margin-top: 50px;
+  text-align: center;
+}
+
+#FaceReco .suspect-images img {
+  max-height: 100px;
 }
