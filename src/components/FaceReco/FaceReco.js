@@ -74,14 +74,6 @@ class FaceApi extends Component {
     });
   }
 
-  getFaceImageUri(className, idx) {
-    return `./images/${className}/${className}${idx}.png`
-  }
-
-  async fetchImage(uri) {
-    return (await fetch(uri)).blob()
-  }
-
   numbersOfSuspectImages() {
     return this.state.classes[0].bufferImages.length;
   }
