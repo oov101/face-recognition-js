@@ -54,9 +54,9 @@ class FaceApi extends Component {
             }
           ]
         }));
+        setTimeout(() => {this.forceUpdate()}, 0);
       }
     );
-    this.force();
   }
 
   openFile() {
