@@ -21,7 +21,10 @@ body {
   color: #94e8b4;
 }
 
-div {
+.App,
+#FaceReco,
+#Tutorial,
+#Welcome {
   position: absolute;
   top: 0;
   right: 0;
