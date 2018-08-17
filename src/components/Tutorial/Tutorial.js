@@ -8,9 +8,36 @@ class Tutorial extends Component {
       <div id="Tutorial">
         <Link to="/"><button>Home</button></Link>
         <h1>Tutorial</h1>
+        <TutorialContainer />
       </div>
     );
   }
+}
+
+const TutorialContainer = () => {
+  return (
+    <div>
+      <NavigationButton />
+      <TutorialImageContainer />
+      <NavigationButton />
+    </div>
+  );
+}
+
+const TutorialImageContainer = () => {
+  return (
+    <div>
+      <p>ImageContainer</p>
+    </div>
+  );
+};
+
+const NavigationButton = () => {
+  return (
+    <div>
+      <button>button test</button>
+    </div>
+  );
 }
 
 export default Tutorial;
