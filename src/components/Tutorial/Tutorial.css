@@ -5,3 +5,7 @@
   height: 100%;
   flex-direction: column;
 }
+
+.TutorialContainer {
+  display: flex;
+}
