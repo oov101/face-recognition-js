@@ -59,10 +59,13 @@ class TutorialContainer extends Component {
 
   render() {
     return (
-      <div className="TutorialContainer" >
-        <NavigationButton direction={"prev"} update={this.prevTip} />
-        <TutorialImageContainer indexOfTip={this.state.indexOfTip} />
-        <NavigationButton direction={"next"} update={this.nextTip} />
+      <div>
+        <div className="TutorialContainer" >
+          <NavigationButton direction={"prev"} update={this.prevTip} />
+          <TutorialImageContainer indexOfTip={this.state.indexOfTip} />
+          <NavigationButton direction={"next"} update={this.nextTip} />
+        </div>
+        <p className="tip">{tutorialTips.tips[this.state.indexOfTip]}</p>
       </div>
     );
   }
@@ -72,7 +75,6 @@ const TutorialImageContainer = (props) => {
   return (
     <div className="TutorialImageContainer">
       <img src={tutorialImages[props.indexOfTip]} alt="" />
-      <p>{tutorialTips.tips[props.indexOfTip]}</p>
     </div>
   );
 };
