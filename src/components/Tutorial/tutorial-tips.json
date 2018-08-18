@@ -1,9 +1,9 @@
 {
 	"tips": [
-		"tip 1",
-		"tip 2",
-		"tip 3",
-		"tip 4",
-		"tip 5"
+		"How to use? First add name for your suspect. Then Open suspect file/s and Open file for testing.",
+		"Select and open mono .png files 150x150px.",
+		"You can use multiple files for better precision.",
+		"Your suspect files!",
+		"Your suspect found!"
 	]
 }
