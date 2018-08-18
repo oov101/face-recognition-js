@@ -70,7 +70,7 @@ class TutorialContainer extends Component {
 
 const TutorialImageContainer = (props) => {
   return (
-    <div>
+    <div className="TutorialImageContainer">
       <img src={tutorialImages[props.indexOfTip]} alt="" />
       <p>{tutorialTips.tips[props.indexOfTip]}</p>
     </div>

@@ -8,4 +8,17 @@
 
 .TutorialContainer {
   display: flex;
+  align-items: center;
+}
+
+.TutorialContainer img {
+  width: 600px;
+  margin: 20px 40px 0;
+  -webkit-box-shadow: 0px 0px 78px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 78px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 78px 1px rgba(0, 0, 0, 0.75);
+}
+
+.TutorialImageContainer {
+  /* width: 600px; */
 }
