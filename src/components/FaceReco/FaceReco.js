@@ -28,7 +28,6 @@ class FaceApi extends Component {
     this.openAndAddSuspectImages = this.openAndAddSuspectImages.bind(this);
     this.numbersOfSuspectImages = this.numbersOfSuspectImages.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.force = this.force.bind(this);
   }
 
   openAndAddSuspectImages() {
@@ -164,10 +163,6 @@ class FaceApi extends Component {
         }
       ]
     })
-  }
-
-  force() {
-    this.forceUpdate();
   }
 
   render() {
