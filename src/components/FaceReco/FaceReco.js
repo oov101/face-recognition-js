@@ -17,7 +17,8 @@ class FaceApi extends Component {
           base64: []
         }
       ],
-      image: ''
+      image: '',
+      loading: false
     };
     this.maxDistance = 0.6;
     this.minConfidence = 0.7;
@@ -67,7 +68,8 @@ class FaceApi extends Component {
         let base64Image = data.toString('base64');
         let imgSrcString = `data:image/${filePath.split('.').pop()};base64,${base64Image}`;
         this.setState({
-          image: imgSrcString
+          image: imgSrcString,
+          loading: true
         });
         this.run();
       });
@@ -141,13 +143,16 @@ class FaceApi extends Component {
         Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 16 })
       );
     });
+    this.setState({
+      loading: false
+    });
   }
 
   async run() {
     await faceapi.loadFaceDetectionModel('./weights');
     await faceapi.loadFaceLandmarkModel('./weights');
     await faceapi.loadFaceRecognitionModel('./weights');
-    this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet, this.numbersOfSuspectImages());
+    this.trainDescriptorsByClass = await this.initTrainDescriptorsByClass(faceapi.recognitionNet,this.numbersOfSuspectImages());
     this.updateResults();
   }
 
@@ -181,16 +186,28 @@ class FaceApi extends Component {
           })} 
         </div>
         {this.state.image &&
+        <div>
+          <div className="loading-container">
+            { this.state.loading &&
+              <Loading />
+            }
+          </div>
           <div id="render-container">
             <div>
               <img id="inputImg" src={this.state.image} alt="" />
               <canvas id="overlay" />
             </div>
           </div>
+        </div>
         }
       </div>
     );
   }
 }
 
+const Loading = () => {
+  return(
+    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  );
+}
 export default FaceApi;
